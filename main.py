@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import sqlite3
+import tempfile
 from datetime import date as Date
 from pathlib import Path
 from typing import Any
@@ -13,10 +14,24 @@ from fastmcp import FastMCP
 
 
 PROJECT_DIR = Path(__file__).resolve().parent
-DB_PATH = Path(
-    os.getenv("EXPENSE_DB_PATH", str(PROJECT_DIR / "expenses.db"))
-).expanduser()
 CATEGORIES_PATH = PROJECT_DIR / "categories.json"
+
+
+def _resolve_db_path() -> Path:
+    """Select an explicit, local, or hosted-environment database path."""
+    configured_path = os.getenv("EXPENSE_DB_PATH")
+    if configured_path:
+        return Path(configured_path).expanduser()
+
+    local_path = PROJECT_DIR / "expenses.db"
+    writable_target = local_path if local_path.exists() else PROJECT_DIR
+    if os.access(writable_target, os.W_OK):
+        return local_path
+
+    return Path(tempfile.gettempdir()) / "expense-tracker" / "expenses.db"
+
+
+DB_PATH = _resolve_db_path()
 
 mcp = FastMCP(
     "ExpenseTracker",

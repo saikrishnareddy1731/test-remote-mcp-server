@@ -35,15 +35,16 @@ page and normally prints no output while idle.
 
 ## Database location
 
-By default, data is stored in `expenses.db` beside `main.py`. Override the path
-for a deployment or test environment:
+By default, data is stored in `expenses.db` beside `main.py` when that directory
+is writable. In a read-only hosted environment, the server automatically falls
+back to `/tmp/expense-tracker/expenses.db`. Override the path explicitly with:
 
 ```bash
 EXPENSE_DB_PATH=/tmp/expenses.db uv run main.py
 ```
 
-Keep `EXPENSE_DB_PATH` on persistent storage in production if expenses must
-survive application restarts or redeployments.
+The `/tmp` fallback is ephemeral. Point `EXPENSE_DB_PATH` at persistent storage
+in production if expenses must survive application restarts or redeployments.
 
 ## Remote proxy
 
