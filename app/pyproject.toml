@@ -1,0 +1,13 @@
+[project]
+name = "mcp-client"
+version = "0.1.0"
+description = "LangChain multi-server MCP client with a premium Streamlit chat UI"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "langchain>=1.4.4",
+    "langchain-mcp-adapters>=0.3.2",
+    "langchain-openai>=1.7.0",
+    "python-dotenv>=1.2.4",
+    "streamlit>=1.65.0",
+]

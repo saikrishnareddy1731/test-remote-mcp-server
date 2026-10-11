@@ -12,3 +12,14 @@ wheels/
 # Local data and test artifacts
 expenses.db
 .pytest_cache/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# OS and generated artifacts
+.DS_Store
+*.db
+media/
+**/media/
