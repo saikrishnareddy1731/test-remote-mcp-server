@@ -160,8 +160,8 @@ brew install cairo pango pkg-config ffmpeg
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/saikrishnareddy1731/test-remote-mcp-server.git
-cd test-remote-mcp-server
+git clone https://github.com/saikrishnareddy1731/mcp-tool-orchestration-platform.git
+cd mcp-tool-orchestration-platform
 ```
 
 ### 2. Install each isolated environment
