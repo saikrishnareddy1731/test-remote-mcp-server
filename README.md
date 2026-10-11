@@ -103,9 +103,9 @@ flowchart LR
 
 ```text
 .
-├── main.py                         # Expense MCP server
-├── categories.json                 # Expense category taxonomy
-├── tests/                          # Expense-server tests
+├── main.py                         # Gateway-compatible expense entry point
+├── categories.json                 # Gateway-compatible category data
+├── tests/                          # Gateway-compatible expense tests
 ├── app/
 │   ├── client1.py                  # Terminal multi-server client
 │   ├── client2.py                  # Premium Streamlit chat client
@@ -115,6 +115,12 @@ flowchart LR
 ├── modules/
 │   ├── math-server/
 │   │   ├── main.py
+│   │   ├── tests/
+│   │   ├── pyproject.toml
+│   │   └── uv.lock
+│   ├── expense-server/
+│   │   ├── main.py
+│   │   ├── categories.json
 │   │   ├── tests/
 │   │   ├── pyproject.toml
 │   │   └── uv.lock
@@ -161,8 +167,13 @@ cd test-remote-mcp-server
 ### 2. Install each isolated environment
 
 ```bash
-# Expense server at repository root
+# Gateway-compatible expense server at repository root
 uv sync
+
+# Expense server used by the local multi-server client
+cd modules/expense-server
+uv sync
+cd ../..
 
 # Math server
 cd modules/math-server
@@ -230,6 +241,10 @@ Run both tested server suites:
 ```bash
 uv run pytest
 
+cd modules/expense-server
+uv run pytest
+cd ../..
+
 cd modules/math-server
 uv run pytest
 ```
@@ -238,6 +253,7 @@ Expected result:
 
 ```text
 Expense server: 2 tests passed
+Expense module: 2 tests passed
 Math server:    3 tests passed
 ```
 
@@ -274,6 +290,11 @@ EXPENSE_DB_PATH=/path/to/persistent/volume/expenses.db
 The expense server can run over HTTP for remote MCP clients. The math and Manim
 servers use STDIO in this project because they are launched and supervised by
 the local orchestration client.
+
+The expense implementation also lives in `modules/expense-server/`, alongside
+the Math and Manim services. The root entry point is retained intentionally so
+existing FastMCP Gateway deployments can continue launching `main.py` without a
+configuration change.
 
 ## Engineering decisions
 

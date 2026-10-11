@@ -10,6 +10,7 @@ load_dotenv()
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 MATH_SERVER = REPO_ROOT / "modules" / "math-server"
+EXPENSE_SERVER = REPO_ROOT / "modules" / "expense-server"
 MANIM_SERVER = REPO_ROOT / "modules" / "manim-server"
 
 SERVERS = {
@@ -20,10 +21,10 @@ SERVERS = {
     },
     "expense": {
         "transport": "stdio",
-        "command": str(REPO_ROOT / ".venv" / "bin" / "fastmcp"),
+        "command": str(EXPENSE_SERVER / ".venv" / "bin" / "fastmcp"),
         "args": [
             "run",
-            str(REPO_ROOT / "main.py"),
+            str(EXPENSE_SERVER / "main.py"),
             "--no-banner",
         ],
     },
