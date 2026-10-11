@@ -296,6 +296,10 @@ the Math and Manim services. The root entry point is retained intentionally so
 existing FastMCP Gateway deployments can continue launching `main.py` without a
 configuration change.
 
+No proxy entry point is needed: local clients launch the module directly, and
+remote clients connect to the deployed MCP endpoint without another server-side
+proxy layer.
+
 ## Engineering decisions
 
 ### Why separate MCP servers?
