@@ -346,11 +346,6 @@ chunks, then streams the grounded final answer after tool execution.
 - Handling relative dates deterministically with application-provided context.
 - Designing a responsive UI around tool calls that do not emit visible tokens.
 
-## Attribution
-
-The Manim MCP module is derived from the MIT-licensed
-[`abhiemj/manim-mcp-server`](https://github.com/abhiemj/manim-mcp-server).
-Its original license is retained at `modules/manim-server/LICENSE.txt`.
 
 ## Author
 
